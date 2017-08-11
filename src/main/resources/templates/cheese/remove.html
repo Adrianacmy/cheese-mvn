@@ -11,9 +11,9 @@
 <nav th:replace="fragments :: navigation"></nav>
 
 
-    <ul th:each="cheese: ${cheeses}">
-       Type: <li th:text="${cheese.key}">key</li>
-        Description:<li th:text="${cheese.value}">value</li><br/>
-    </ul>
+<tr th:each="cheese: ${cheeses}">
+    Type: <td th:text="${cheese.key}">key</td>
+    Description:<td th:text="${cheese.value}">value</td><br/>
+</tr>
 </body>
 </html>

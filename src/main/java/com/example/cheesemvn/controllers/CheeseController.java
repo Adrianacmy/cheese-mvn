@@ -7,11 +7,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 @Controller
 @RequestMapping("cheese")
 public class CheeseController {
-    static ArrayList<String> cheeses = new ArrayList<>();
+//    static ArrayList<String> cheeses = new ArrayList<>();
+    static ArrayList<HashMap<String, String>> cheeses = new ArrayList<>();
 
     @RequestMapping(value = "")
     public String cheese(Model model){
@@ -23,13 +25,17 @@ public class CheeseController {
 
     @RequestMapping(value = "add", method = RequestMethod.GET)
     public String displayAddCheeseForm(Model model){
-        model.addAttribute("title", "add cheese");
+        model.addAttribute("title", "Add Cheese");
         return "cheese/add";
     }
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    public String processAddCheeseForm(@RequestParam String cheeseName){
-        cheeses.add(cheeseName);
+    public String processAddCheeseForm(@RequestParam String cheeseName, @RequestParam String cheeseDescription){
+        HashMap<String, String> newCheese = new HashMap<>();
+        newCheese.put(cheeseName, cheeseName);
+        newCheese.put(cheeseDescription, cheeseDescription);
+        cheeses.add(newCheese);
+
         return "redirect:";
     }
 
