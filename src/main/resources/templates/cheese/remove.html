@@ -1,19 +1,29 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://thymeleafe.org /">
 <head th:replace="fragments :: head"></head>
-<body>
+<body class="container">
 
 <h1 th:text="${title}">Default Cheese</h1>
+<hr/>
 
 
 <p th:unless="${cheeses} and ${cheeses.size()}">no cheese yet :(</p>
 
 <nav th:replace="fragments :: navigation"></nav>
+<hr/>
 
 
-<tr th:each="cheese: ${cheeses}">
-    Type: <td th:text="${cheese.key}">key</td>
-    Description:<td th:text="${cheese.value}">value</td><br/>
-</tr>
+<form class="form" method="post">
+    <div th:each="cheese: ${cheeses}">
+        <input type="checkbox" name="cheeseRemoving" th:value="${cheese.name}" id="${cheese.name}"/>
+        <lable th:text="${cheese.name}" for="${cheese.name}"></lable>
+    </div>
+
+    <hr/>
+    <button type="submit" class="btn btn-default">Remove</button>
+</form>
+
+
+
 </body>
 </html>

@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://thymeleafe.org /">
 <head th:replace="fragments :: head"></head>
-<body>
+<body class="container">
 
 <h1 th:text="${title}">Default Cheese</h1>
+<hr/>
 
 
 <p th:unless="${cheeses} and ${cheeses.size()}">no cheese yet :(</p>
 
 <nav th:replace="fragments :: navigation"></nav>
+<hr/>
 
-
-    <ul th:each="cheese: ${cheeses}">
-       Type: <li th:text="${cheese.key}">key</li>
-        Description:<li th:text="${cheese.value}">value</li><br/>
+    <ul th:each="cheese : ${cheeses}" class="list-unstyled">
+        <h3><li th:text="${cheese.name}">key</li></h3>
+       <li th:text="${cheese.description}">value</li><br/>
     </ul>
+
 </body>
 </html>
