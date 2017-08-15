@@ -15,8 +15,8 @@
 
 <form class="form" method="post">
     <div th:each="cheese: ${cheeses}">
-        <input type="checkbox" name="cheeseRemoving" th:value="${cheese.name}" id="${cheese.name}"/>
-        <lable th:text="${cheese.name}" for="${cheese.name}"></lable>
+        <input type="checkbox" name="removeIds" th:value="${cheese.cheeseId}" id="${cheese.cheeseId}"/>
+        <lable th:text="${cheese.name}" for="${cheese.cheeseId}"></lable>
     </div>
 
     <hr/>

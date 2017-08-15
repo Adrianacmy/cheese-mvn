@@ -3,10 +3,23 @@ package com.example.cheesemvn.models;
 public class Cheese {
     private String name;
     private String description;
+    private int cheeseId;
+    public static int nextId;
 
     public Cheese(String name, String description) {
+        this();
         this.name = name;
         this.description = description;
+        this.cheeseId = cheeseId;
+    }
+
+    public Cheese(){
+        cheeseId = nextId;
+        nextId++;
+    }
+
+    public int getCheeseId() {
+        return cheeseId;
     }
 
     public String getName() {
@@ -30,6 +43,9 @@ public class Cheese {
         return "Cheese{" +
                 "name='" + name + '\'' +
                 ", description='" + description + '\'' +
+                ", cheeseId=" + cheeseId +
                 '}';
     }
+
+
 }
