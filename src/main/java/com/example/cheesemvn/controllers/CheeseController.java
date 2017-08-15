@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static java.util.regex.Pattern.matches;
+
 
 @Controller
 @RequestMapping("cheese")
@@ -31,10 +33,22 @@ public class CheeseController {
     }
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    public String processAddCheeseForm(@RequestParam String cheeseName, @RequestParam String cheeseDescription){
-        Cheese newCheese = new Cheese(cheeseName, cheeseDescription);
-        cheeses.add(newCheese);
-        return "redirect:";
+    public String processAddCheeseForm(@RequestParam String cheeseName, @RequestParam String cheeseDescription, Model model){
+        String pattern = "[a-zA-Z][a-zA-Z ]+[a-zA-Z]$";
+        if (cheeseName != null && matches(pattern, cheeseName)){
+            Cheese newCheese = new Cheese(cheeseName, cheeseDescription);
+            cheeses.add(newCheese);
+            return "redirect:";
+        }else{
+            cheeseName = "";
+            String addCheeseDescription = cheeseDescription;
+            model.addAttribute("title", "Add Cheese");
+            model.addAttribute("cheeseDescription", addCheeseDescription);
+            model.addAttribute("cheeseName", cheeseName);
+
+            return "cheese/add";
+        }
+
     }
 
     @RequestMapping(value = "remove", method = RequestMethod.GET)
