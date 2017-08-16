@@ -22,8 +22,10 @@ public class CheeseData {
     }
 
     //update
-    public static Cheese update(int id){
-        return getById(id);
+    public static void update(int id, String name, String description){
+        Cheese cheeseToUpdate = getById(id);
+        cheeseToUpdate.setName(name);
+        cheeseToUpdate.setDescription(description);
     }
 
     //getById

@@ -2,17 +2,14 @@ package com.example.cheesemvn.controllers;
 
 import com.example.cheesemvn.models.Cheese;
 import com.example.cheesemvn.models.CheeseData;
+import com.example.cheesemvn.models.CheeseRate;
+import com.example.cheesemvn.models.CheeseType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
-import static java.util.regex.Pattern.matches;
+import javax.validation.Valid;
 
 
 @Controller
@@ -23,7 +20,6 @@ public class CheeseController {
     @RequestMapping(value = "")
     public String cheese(Model model){
         model.addAttribute("cheeses", CheeseData.getAll());
-
         model.addAttribute("title", "I Hate Cheese");
         return "cheese/index";
     }
@@ -31,27 +27,21 @@ public class CheeseController {
     @RequestMapping(value = "add", method = RequestMethod.GET)
     public String displayAddCheeseForm(Model model){
         model.addAttribute("title", "Add Cheese");
+        model.addAttribute(new Cheese());
+        model.addAttribute("cheeseTypes", CheeseType.values());
+        model.addAttribute("cheeseRates", CheeseRate.values());
         return "cheese/add";
     }
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    public String processAddCheeseForm(@ModelAttribute Cheese newCheese, Model model){
-//        String pattern = "[a-zA-Z][a-zA-Z ]+[a-zA-Z]$";
-//        if (cheeseName != null && matches(pattern, cheeseName)){
-//            Cheese newCheese = new Cheese(cheeseName, cheeseDescription);
-            CheeseData.add(newCheese);
-            return "redirect:";
-//        }
-// else{
-//            cheeseName = "";
-//            String addCheeseDescription = cheeseDescription;
-//            model.addAttribute("title", "Add Cheese");
-//            model.addAttribute("cheeseDescription", addCheeseDescription);
-//            model.addAttribute("cheeseName", cheeseName);
-//
-//            return "cheese/add";
-//        }
-
+    public String processAddCheeseForm(@ModelAttribute @Valid Cheese newCheese,
+                                       Errors errors, Model model){
+        if (errors.hasErrors()){
+            model.addAttribute("title", "Add Cheese");
+            return "cheese/add";
+        }
+        CheeseData.add(newCheese);
+        return "redirect:";
     }
 
     @RequestMapping(value = "remove", method = RequestMethod.GET)
@@ -62,10 +52,34 @@ public class CheeseController {
     }
 
     @RequestMapping(value = "remove", method = RequestMethod.POST)
-    public String removeCheeses(@RequestParam ArrayList<Integer> removeIds){
+    public String removeCheeses(@RequestParam int[] removeIds){
         for(int removeId : removeIds){
             CheeseData.remove(removeId);
         }
+        return "redirect:";
+    }
+
+    @RequestMapping(value = "edit/{cheeseId}", method = RequestMethod.GET)
+    public String displayEditForm(Model model, @PathVariable int cheeseId){
+        Cheese cheeseToEdit = CheeseData.getById(cheeseId);
+        model.addAttribute("cheeseToEdit", cheeseToEdit);
+        model.addAttribute("cheeseTypes", CheeseType.values());
+        model.addAttribute("cheeseRates", CheeseRate.values());
+
+        return "cheese/edit";
+
+    }
+
+    @RequestMapping(value = "edit", method = RequestMethod.POST)
+    public String processEditForm(@RequestParam int cheeseId, @RequestParam String name,
+                                  @RequestParam String description, @RequestParam CheeseType type,
+                                  @RequestParam CheeseRate rate){
+        Cheese cheeseToUpdate = CheeseData.getById(cheeseId);
+        cheeseToUpdate.setName(name);
+        cheeseToUpdate.setDescription(description);
+        cheeseToUpdate.setType(type);
+        cheeseToUpdate.setRate(rate);
+//        CheeseData.update(cheeseId, name, description);
         return "redirect:";
     }
 }

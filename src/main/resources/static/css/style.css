@@ -6,3 +6,8 @@ form h1 {
     width: 80%;
 
 }
+
+ul>span{
+    font-size: 2em;
+    font-weight: 30em;
+}

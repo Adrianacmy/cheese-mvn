@@ -5,7 +5,7 @@
 
 <body class="container">
 
-<h1 th:text="${title}">Default Cheese</h1>
+<h1 th:text="'Edit Cheese '+${cheeseToEdit.name}+' (id='+${cheeseToEdit.cheeseId}+')'">Default Cheese</h1>
 <hr/>
 
 <p th:unless="${cheeses} and ${cheeses.size()}">no cheese yet :(</p>
@@ -14,7 +14,7 @@
 <hr/>
 
 
-<form class="form-horizontal" method="post" th:object="${cheese}">
+<form class="form-horizontal" method="post" th:object="${cheeseToEdit}" action="/cheese/edit">
     <!--<h1 th:text="${title}" class=" col-sm-offset-4">Default Cheese</h1>-->
     <div class="form-group">
         <!--<label for="cheeseName" class="col-sm-2  control-label">CheeseName</label>-->
@@ -30,8 +30,6 @@
             <span th:errors="*{description}" class="alert alert-warning form-control"></span>
         </div>
     </div>
-
-
 
     <div class="form-group">
         <label class="col-sm-3 form-inline" for="type" >Type
@@ -52,8 +50,10 @@
             </select>
         </label>
 
+        <input type="hidden" th:value="${cheeseToEdit.cheeseId}" name="cheeseId" />
+
         <div class="col-sm-2 col-sm-offset-4 ">
-            <button type="submit" class="btn btn-default form-control">ADD</button>
+            <button type="submit" class="btn btn-default form-control">Save</button>
         </div>
     </div>
 </form>
