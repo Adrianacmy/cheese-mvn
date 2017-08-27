@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleafe.org /">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+
+<h1 th:text="${title}">Default Cheese</h1>
+<hr/>
+
+
+<!--<p th:unless="${cheeses} and ${cheeses.size()}">no cheese yet :(</p>-->
+
+<nav th:replace="fragments :: navigation"></nav>
+<hr/>
+
+<ul>
+    <li th:each="category : ${categories}">
+        <a th:href="'/cheese/category?id=' + ${category.id}"
+           th:text="${category.name}"></a>
+    </li>
+</ul>
+
+<p> <a href="category/add">Add Category</a></p>
+</body>
+</html>

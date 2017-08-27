@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleafe.org /">
+
+<head th:replace="fragments :: head"></head>
+
+<body class="container">
+
+<h1 th:text="${title}">Default Cheese</h1>
+<hr/>
+
+
+<nav th:replace="fragments :: navigation"></nav>
+<hr/>
+
+
+<form class="form-horizontal" method="post" th:object="${form}" action="/menu/add-item" >
+
+    <div class="form-group">
+        <div class="col-sm-12">
+            <select name="cheeseId" class=" btn btn-default form-control">
+                <option th:each="cheese : *{cheeses}"
+                        th:text="${cheese.name}"
+                        th:value="${cheese.id}"></option>
+            </select>
+        </div>
+        <span th:errors="*{cheeseId}" class="alert alert-warning form-control"></span>
+    </div>
+
+    <input type="hidden" name="menuId" th:value="*{menu.id}" />
+
+    <div class="form-group">
+        <div class="col-sm-12">
+            <button type="submit" class="btn btn-default form-control">Add Item</button>
+        </div>
+    </div>
+</form>
+
+
+
+</body>
+</html>
