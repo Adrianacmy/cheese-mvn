@@ -15,8 +15,8 @@
     <ul th:each="cheese : ${cheeses}" class="list-unstyled">
         <span th:text="${cheese.name}">name</span>
         <a th:href="@{'/cheese/edit/' + ${cheese.cheeseId}}"><em>edit</em></a>
-        <li th:text="'Rate: '+${cheese.rate.name}">rate</li>
-        <li th:text="'Type: '+${cheese.type.name}">type</li>
+        <li th:text="'Rate: '+${cheese.rate}">rate</li>
+        <li th:text="'Type: '+${cheese.type}">type</li>
         <li th:text="'Description: '+${cheese.description}">description</li><br/>
     </ul>
 

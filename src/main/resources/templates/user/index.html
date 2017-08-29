@@ -13,9 +13,9 @@
 
     <ul th:each="user : ${users}" class="list-unstyled">
         <span th:text="'Name: ' + ${user.username}">name</span>
-        <a th:href="@{'/user/remove/' + ${user.userId}}"><em>remove</em></a>
+        <!--<a th:href="@{'/user/remove/' + ${user.userId}}"><em>remove</em></a>-->
         <p th:text="'Email: ' + ${user.email}">name</p>
-        <p th:text="'Creat-Date: ' + ${user.date.toString().substring(0, 10)}">name</p>
+        <p th:text="'Creat-Date: ' + ${user.date.toString().substring(0, 10)}">name</p><br/>
     </ul>
 
 

@@ -17,7 +17,7 @@ public class UserController {
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String userindex(Model model){
         model.addAttribute("users", UserData.getAll());
-        model.addAttribute("title","All User");
+        model.addAttribute("title","All Users");
         return "user/index";
     }
 
@@ -47,7 +47,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "remove", method = RequestMethod.POST)
-    public String removeCheeses(@RequestParam int[] removeIds){
+    public String removeUsers(@RequestParam int[] removeIds){
         for(int removeId : removeIds){
             UserData.remove(removeId);
         }
