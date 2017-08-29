@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleafe.org /">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+
+<h1 th:text="${title}">Default Cheese</h1>
+<hr/>
+
+<nav th:replace="fragments :: navigation"></nav>
+<hr/>
+
+<div class="container">
+
+    <ul th:each="user : ${users}" class="list-unstyled">
+        <span th:text="'Name: ' + ${user.username}">name</span>
+        <a th:href="@{'/user/remove/' + ${user.userId}}"><em>remove</em></a>
+        <p th:text="'Email: ' + ${user.email}">name</p>
+        <p th:text="'Creat-Date: ' + ${user.date.toString().substring(0, 10)}">name</p>
+    </ul>
+
+
+</div>
+
+</body>
+</html>

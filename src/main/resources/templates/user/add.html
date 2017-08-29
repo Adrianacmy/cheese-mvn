@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleafe.org /">
+
+<head th:replace="fragments :: head"></head>
+
+<body class="container">
+
+<h1 th:text="${title}">Default Cheese</h1>
+<hr/>
+
+<!--<p th:unless="${cheeses} and ${cheeses.size()}">no cheese yet :(</p>-->
+
+<nav th:replace="fragments :: navigation"></nav>
+<hr/>
+
+
+<form class="form-horizontal"  method="post" th:object="${user}" >
+
+    <!--<div class="form-group">-->
+        <!--<div class="col-sm-12">-->
+        <!--<input type="text" class="form-control" name="username" placeholder="username" value="username"/>-->
+        <!--<span errors="username" class="alert alert-warning form-control"></span>-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="form-group">-->
+        <!--<div class="col-sm-12">-->
+            <!--<input type="text" class="form-control" name="username" placeholder="username" value="username"/>-->
+            <!--<span errors="username" class="alert alert-warning form-control"></span>-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <div class="form-group">
+        <div class="col-sm-12">
+            <input type="text" class="form-control" th:field="*{username}" placeholder="username" th:value="*{username}"/>
+            <span th:errors="*{username}" class="alert alert-warning form-control"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-12">
+            <input type="password" class="form-control" th:field="*{password}" placeholder="password" th:value="*{password}"/>
+            <span th:errors="*{password}" class="alert alert-warning form-control"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-12">
+            <input type="text" class="form-control" th:field="*{email}" placeholder="email" th:value="*{email}"/>
+            <span th:errors="*{email}" class="alert alert-warning form-control"></span>
+        </div>
+    </div>
+
+
+    <!--<input type="hidden" th:filed="*{date}">-->
+
+
+
+        <div class="col-sm-2 col-sm-offset-4 ">
+            <button type="submit" class="btn btn-default form-control">Add A User</button>
+        </div>
+</form>
+
+
+
+</body>
+</html>

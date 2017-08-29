@@ -17,7 +17,6 @@
 <form class="form-horizontal" method="post" th:object="${cheese}">
     <!--<h1 th:text="${title}" class=" col-sm-offset-4">Default Cheese</h1>-->
     <div class="form-group">
-        <!--<label for="cheeseName" class="col-sm-2  control-label">CheeseName</label>-->
         <div class="col-sm-12">
             <input type="text" class="form-control" th:field="*{name}" placeholder="name" th:value="*{name}"/>
             <span th:errors="*{name}" class="alert alert-warning form-control"></span>

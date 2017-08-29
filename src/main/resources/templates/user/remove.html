@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleafe.org /">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+
+<h1 th:text="${title}">Default Cheese</h1>
+<hr/>
+
+
+
+<nav th:replace="fragments :: navigation"></nav>
+<hr/>
+
+
+<form class="form" method="post">
+    <div th:each="user: ${users}">
+        <input type="checkbox" name="removeIds" th:value="${user.userId}" id="${user.userId}"/>
+        <lable th:text="${user.username}" for="${user.userId}"></lable>
+    </div>
+
+    <hr/>
+    <button type="submit" class="btn btn-default">Remove</button>
+</form>
+
+
+
+</body>
+</html>
